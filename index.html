@@ -5480,8 +5480,7 @@
       </button>
     </div>
   </div>
-  <!-- EmailJS SDK must come BEFORE your script -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <!-- Email is now handled by the Vercel serverless function at /api/send-demo -->
 
   <script>
     /* ══════════════════════════════════════════
@@ -5495,16 +5494,9 @@
     }
 
     /* ══════════════════════════════════════════
-       EMAILJS CONFIG — fill in your IDs
+       EMAIL CONFIG — powered by Vercel + Resend
+       API route: /api/send-demo
     ══════════════════════════════════════════ */
-    const EJS = {
-      publicKey: 'fJiRWtzzv-CcBcRGe',
-      serviceId: 'service_l5jgj5f',
-      adminTpl: 'template_971612s',
-      userTpl: 'template_eoi8wvs',
-    };
-    // Init after SDK is loaded
-    window.addEventListener('load', () => emailjs.init({ publicKey: EJS.publicKey }));
 
     /* ══════════════════════════════════════════
        DATA
@@ -5699,13 +5691,20 @@
       const data = collectFormData(prefix);
 
       try {
-        await emailjs.send(EJS.serviceId, EJS.adminTpl, data);
-        await emailjs.send(EJS.serviceId, EJS.userTpl, { ...data, to_email: data.from_email });
+        const res = await fetch('/api/send-demo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error || `Server error ${res.status}`);
+        }
         document.getElementById(wrapId).style.display = 'none';
         const s = document.getElementById(succId);
         s.style.display = 'block'; s.classList.add('show');
       } catch (err) {
-        console.error('EmailJS error:', err);
+        console.error('Send demo error:', err);
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>&nbsp; Try Again';
         alert('Something went wrong. Please try WhatsApp directly.');
