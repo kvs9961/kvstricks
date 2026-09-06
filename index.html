@@ -1797,12 +1797,6 @@
       transition: transform .4s var(--spring)
     }
 
-    .why-card:hover .wc-icon {
-      background: var(--rl);
-      /* keep it — image already has depth, no need to invert to solid blue */
-      transform: none
-    }
-
     .why-card:hover .wc-icon img {
       transform: scale(1.1) rotate(-6deg)
     }
@@ -4538,13 +4532,66 @@
     }
 
     /* ═══ FIXED UI ═══ */
-    /*.fwa{position:fixed;bottom:6.5rem;right:2rem;z-index:200;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.55rem;text-decoration:none;box-shadow:0 4px 26px rgba(37,211,102,.48);transition:transform .35s var(--spring),box-shadow .3s}
-.fwa:hover{transform:scale(1.15);box-shadow:0 8px 38px rgba(37,211,102,.65)}
-.btt{position:fixed;bottom:2rem;right:2rem;z-index:200;width:48px;height:48px;background:#fff;border:1.5px solid var(--bd);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--mu);font-size:.9rem;cursor:pointer;box-shadow:var(--sh);transition:all .35s var(--spring);opacity:0;pointer-events:none}
-.btt.vis{opacity:1;pointer-events:all}
-.btt:hover{background:var(--r);border-color:var(--r);color:#fff;box-shadow:0 6px 24px rgba(37,99,235,.42);transform:scale(1.1) translateY(-2px)}
+    .fwa {
+      position: fixed;
+      bottom: 6.5rem;
+      right: 2rem;
+      z-index: 200;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.55rem;
+      text-decoration: none;
+      box-shadow: 0 4px 26px rgba(37, 211, 102, .48);
+      transition: transform .35s var(--spring), box-shadow .3s
+    }
 
-/* ═══ SECTION POLISH: ABOUT / WHY CHOOSE ME ═══ */
+    .fwa:hover {
+      transform: scale(1.15);
+      box-shadow: 0 8px 38px rgba(37, 211, 102, .65)
+    }
+
+    .btt {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      width: 48px;
+      height: 48px;
+      background: #fff;
+      border: 1.5px solid var(--bd);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--mu);
+      font-size: .9rem;
+      cursor: pointer;
+      box-shadow: var(--sh);
+      transition: all .35s var(--spring);
+      opacity: 0;
+      pointer-events: none
+    }
+
+    .btt.vis {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .btt:hover {
+      background: var(--r);
+      border-color: var(--r);
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(37, 99, 235, .42);
+      transform: scale(1.1) translateY(-2px)
+    }
+
+    /* ═══ SECTION POLISH: ABOUT / WHY CHOOSE ME ═══ */
     #about.sec {
       padding: 5rem 5%
     }
@@ -5128,7 +5175,8 @@
 
   <!-- NAV -->
   <nav id="nav">
-    <a href="#" class="n-logo"><img src="images/logo.png" alt="KVSTricks" />
+    <a href="#" class="n-logo"><img src="images/logo.png" alt="KVSTricks"
+        onerror="this.style.display='none';this.insertAdjacentHTML('afterend','&lt;span&gt;KVS&lt;span class=&quot;n-logo-dot&quot;&gt;&lt;/span&gt;Tricks&lt;/span&gt;')" />
     </a>
     <ul class="n-mid">
       <li><a href="#about">About</a></li>
@@ -5903,8 +5951,8 @@
             <div class="cf-success-title">Message Received!</div>
             <div class="cf-success-sub">I'll reach out within 24 hrs to confirm your slot.</div>
             <a href="#" onclick="wa(''); return false;" target="_blank" class="cf-submit"
-              style="text-decoration:none;margin-top:0"><i class="fa-brands fa-whatsapp"></i>&nbsp; Thanks for
-              applying</a>
+              style="text-decoration:none;margin-top:0"><i class="fa-brands fa-whatsapp"></i>&nbsp; Message me on
+              WhatsApp</a>
           </div>
           <div id="page-form-wrap">
             <div class="cf-row">
@@ -5968,10 +6016,10 @@
               <div>
                 <div class="cf-info-lbl">Professional</div>
                 <div class="cf-info-val">LinkedIn</div>
-                <div class="cf-info-sub"></div>
+                <div class="cf-info-sub">Connect with KVS Harsha</div>
               </div>
             </a>
-            <a href="https://www.youtube.com/@KVS the AI Engineer" target="_blank" class="cf-info-card">
+            <a href="https://www.youtube.com/@KVSTricks" target="_blank" class="cf-info-card">
               <div class="cf-info-icon ci-yt"><i class="fa-brands fa-youtube"></i></div>
               <div>
                 <div class="cf-info-lbl">Free Content</div>
@@ -6048,23 +6096,12 @@
     </div>
   </footer>
 
-  <a href="#" onclick="wa('Hi%20Harsha%20sir%2C%20I'm%20interested%20in%20your%20AI%20courses!'); return false;"
+  <a href="#" onclick="wa('Hi%20Harsha%20sir%2C%20I%27m%20interested%20in%20your%20AI%20courses!'); return false;"
     target="_blank" class="fwa"><i class="fa-brands fa-whatsapp"></i></a>
   <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i
       class="fa-solid fa-arrow-up"></i></button>
 
   <!-- AI CHATBOT -->
-  <button class="ai-chat-btn" id="aiChatBtn" onclick="toggleChat()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"
-      stroke-linejoin="round">
-      <path
-        d="M12 2C6.48 2 2 6.03 2 11c0 2.7 1.2 5.13 3.13 6.84L4 22l4.36-1.45A10.1 10.1 0 0012 21c5.52 0 10-4.03 10-9s-4.48-9-10-9z" />
-      <circle cx="8.5" cy="11" r="1.5" fill="#fff" stroke="none" />
-      <circle cx="12" cy="11" r="1.5" fill="#fff" stroke="none" />
-      <circle cx="15.5" cy="11" r="1.5" fill="#fff" stroke="none" />
-    </svg>
-    <div class="ai-notif">AI</div>
-  </button>
   <div class="ai-chat-panel" id="aiChatPanel">
     <div class="ai-chat-header">
       <div class="ai-chat-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
@@ -6143,8 +6180,8 @@
     ];
 
     const REVIEWS = [
-      { init: 'RS', name: 'Sowmya J.', role: 'Software Engineer · Hyderabad', course: 'Python & Machine Learning', linkedin: 'https://www.linkedin.com/in/julakantisowmya/', text: "An excellent Python & Machine Learning instructor who explains complex concepts in a simple and practical way. The classes are highly interactive, and every doubt is addressed with patience and clarity. His teaching approach helped me build strong fundamentals and confidence in applying Machine Learning concepts. Highly recommended!" },
-      { init: 'PK', name: 'Suhaib', role: 'Software Engineer → AI Developer', course: 'Generative AI & LangChain', linkedin: 'https://www.linkedin.com/in/mohd-suhaib-aamer/', text: "The Gen AI and LangChain course is exceptional. Built my first RAG app within two weeks of starting. The explanation clarity is something I haven't found on Udemy or Coursera." },
+      { init: 'SJ', name: 'Sowmya J.', role: 'Software Engineer · Hyderabad', course: 'Python & Machine Learning', linkedin: 'https://www.linkedin.com/in/julakantisowmya/', text: "An excellent Python & Machine Learning instructor who explains complex concepts in a simple and practical way. The classes are highly interactive, and every doubt is addressed with patience and clarity. His teaching approach helped me build strong fundamentals and confidence in applying Machine Learning concepts. Highly recommended!" },
+      { init: 'MS', name: 'Suhaib', role: 'Software Engineer → AI Developer', course: 'Generative AI & LangChain', linkedin: 'https://www.linkedin.com/in/mohd-suhaib-aamer/', text: "The Gen AI and LangChain course is exceptional. Built my first RAG app within two weeks of starting. The explanation clarity is something I haven't found on Udemy or Coursera." },
       { init: 'AM', name: 'Anjali M.', role: 'Business Analyst · Bangalore', course: 'SQL & Power BI', linkedin: 'https://www.linkedin.com/in/anjali-m/', text: "As a working professional I needed flexible, no-nonsense learning. The SQL and Power BI modules alone doubled my productivity at work. My manager noticed the dashboards immediately." },
       { init: 'VN', name: 'Vikram N.', role: 'ML Engineer · Pune', course: 'Deep Learning', linkedin: 'https://www.linkedin.com/in/vikram-n/', text: "I had tried three other channels and two Udemy courses before finding KVSTricks. None of them explained backpropagation and CNNs the way Harsha sir does. His real-world AI engineering experience really shows." },
       { init: 'ST', name: 'Siddharth T.', role: 'AI Developer · Chennai', course: 'Agentic AI', linkedin: 'https://www.linkedin.com/in/siddharth-t/', text: "The Agentic AI module is unlike anything else online. We built multi-agent pipelines from scratch. Every session felt like a mentorship, not a lecture." },
@@ -6343,7 +6380,7 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
     function toggleChat() {
       chatOpen = !chatOpen;
       document.getElementById('aiChatPanel').classList.toggle('open', chatOpen);
-      const notif = document.querySelector('.ai-notif'); if (notif) notif.style.display = 'none';
+      const notifs = document.querySelectorAll('.ai-notif'); notifs.forEach(n => n.style.display = 'none');
       if (chatOpen && chatHistory.length === 0) setTimeout(() => addBotMsg("Hi! 👋 I'm the KVS AI Advisor. I'll help you find the perfect course in 2 minutes.\n\nWhat's your current background?", [{ label: "I'm a complete beginner", msg: "I'm completely new to programming. Where should I start?" }, { label: "I know Python basics", msg: "I know basic Python. What should I learn next for AI?" }, { label: "Working professional", msg: "I work in IT and want to transition into AI. What do you recommend?" }]), 400);
       if (chatOpen) setTimeout(() => document.getElementById('aiInput')?.focus(), 500);
     }
@@ -6376,9 +6413,9 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
       inp.value = ''; chatTyping = true; sendBtn.disabled = true;
       addUserMsg(text); chatHistory.push({ role: 'user', content: text });
       try {
-        const res = await fetch('https://api.mistral.ai/v1/chat/completions', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 4UL26kE7e7APCWFdJk46kQWATqY6BD4Q' }, body: JSON.stringify({ model: 'mistral-small-latest', max_tokens: 350, messages: [{ role: 'system', content: CHAT_SYSTEM }, ...chatHistory.slice(-10)] }) });
+        const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: [{ role: 'system', content: CHAT_SYSTEM }, ...chatHistory.slice(-10)] }) });
         const data = await res.json();
-        const reply = data?.choices?.[0]?.message?.content || "I'm having trouble connecting. Please message Harsha sir directly on WhatsApp! 📱";
+        const reply = data?.reply || "I'm having trouble connecting. Please message Harsha sir directly on WhatsApp! 📱";
         chatHistory.push({ role: 'assistant', content: reply });
         const bookChip = chatHistory.length >= 2 ? [{ label: '📅 Book a Free Demo', msg: 'I want to book a free demo session' }] : [];
         addBotMsg(reply, bookChip);
