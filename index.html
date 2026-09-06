@@ -610,12 +610,335 @@
         justify-content: center
       }
 
-      .hero-video-card {
-        max-width: 520px;
-        margin: 0 auto
+      .hero-illustration {
+        max-width: 360px;
+        margin: 2.5rem auto 0
       }
     }
 
+    /* ═══ HERO ILLUSTRATION SYSTEM ═══ */
+    .hero-media-col {
+      overflow: visible
+    }
+
+    .hero-illustration {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto;
+      overflow: visible
+    }
+
+    .hero-illo-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none
+    }
+
+    .hero-illo-dotmove {
+      filter: drop-shadow(0 0 4px rgba(37, 99, 235, .6))
+    }
+
+    .hero-illo-item {
+      position: absolute;
+      z-index: 3;
+      transform: translate(-50%, -50%);
+      filter: drop-shadow(0 14px 26px rgba(15, 23, 42, .08))
+    }
+
+    .hero-illo-svg {
+      display: block;
+      width: 100%;
+      height: 100%
+    }
+
+    .hero-illo-core {
+      top: 52%;
+      left: 50%;
+      width: 30%;
+      z-index: 5
+    }
+
+    .hero-illo-brain {
+      top: 18%;
+      left: 50%;
+      width: 22%;
+      z-index: 2;
+      opacity: .92
+    }
+
+    .hero-illo-code {
+      top: 33%;
+      left: 21%;
+      width: 24%;
+      z-index: 3
+    }
+
+    .hero-illo-analytics {
+      top: 30%;
+      left: 79%;
+      width: 24%;
+      z-index: 3
+    }
+
+    .hero-illo-python {
+      top: 73%;
+      left: 23%;
+      width: 22%;
+      z-index: 3
+    }
+
+    .hero-illo-neural {
+      top: 71%;
+      left: 77%;
+      width: 22%;
+      z-index: 3
+    }
+
+    .hero-illo-laptop {
+      top: 87%;
+      left: 50%;
+      width: 25%;
+      z-index: 4
+    }
+
+    .hero-illo-dot-a,
+    .hero-illo-dot-b {
+      z-index: 1;
+      opacity: .32
+    }
+
+    .hero-illo-dot-a {
+      top: 4%;
+      left: 18%;
+      width: 7%
+    }
+
+    .hero-illo-dot-b {
+      top: 94%;
+      left: 82%;
+      width: 6%
+    }
+
+    .code-cursor {
+      animation: kvsBlink 1.1s steps(2, jump-none) infinite
+    }
+
+    .hero-illo-neural circle {
+      animation: kvsSeqGlow 2.6s ease-in-out infinite
+    }
+
+    .hero-illo-neural circle:nth-of-type(1) {
+      animation-delay: 0s
+    }
+
+    .hero-illo-neural circle:nth-of-type(2) {
+      animation-delay: .3s
+    }
+
+    .hero-illo-neural circle:nth-of-type(3) {
+      animation-delay: .6s
+    }
+
+    .hero-illo-neural circle:nth-of-type(4) {
+      animation-delay: .9s
+    }
+
+    .hero-illo-neural circle:nth-of-type(5) {
+      animation-delay: 1.2s
+    }
+
+    .hero-illo-neural circle:nth-of-type(6) {
+      animation-delay: 1.5s
+    }
+
+    .hero-illo-analytics .hero-illo-svg>rect {
+      animation: kvsPulse 3.2s ease-in-out infinite
+    }
+
+    .hero-illo-analytics .hero-illo-svg>rect:nth-of-type(2) {
+      animation-delay: .2s
+    }
+
+    .hero-illo-analytics .hero-illo-svg>rect:nth-of-type(3) {
+      animation-delay: .4s
+    }
+
+    .hero-illo-analytics .hero-illo-svg>rect:nth-of-type(4) {
+      animation-delay: .6s
+    }
+
+    @keyframes kvsFloat {
+
+      0%,
+      100% {
+        transform: translate(-50%, -50%) translateY(0)
+      }
+
+      50% {
+        transform: translate(-50%, -50%) translateY(-8px)
+      }
+    }
+
+    @keyframes kvsPulse {
+
+      0%,
+      100% {
+        opacity: .72
+      }
+
+      50% {
+        opacity: 1
+      }
+    }
+
+    @keyframes kvsGlow {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 14px 26px rgba(15, 23, 42, .08)) drop-shadow(0 0 0 rgba(37, 99, 235, 0))
+      }
+
+      50% {
+        filter: drop-shadow(0 14px 26px rgba(15, 23, 42, .08)) drop-shadow(0 0 16px rgba(37, 99, 235, .22))
+      }
+    }
+
+    @keyframes kvsSignal {
+      0% {
+        stroke-dashoffset: 24;
+        opacity: .22
+      }
+
+      50% {
+        opacity: .55
+      }
+
+      100% {
+        stroke-dashoffset: 0;
+        opacity: .22
+      }
+    }
+
+    @keyframes kvsSeqGlow {
+
+      0%,
+      100% {
+        opacity: .55
+      }
+
+      50% {
+        opacity: 1
+      }
+    }
+
+    @keyframes kvsBlink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0
+      }
+    }
+
+    @keyframes kvsBreathe {
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.045)
+      }
+    }
+
+    @keyframes kvsWiggle {
+
+      0%,
+      100% {
+        transform: rotate(-3deg)
+      }
+
+      50% {
+        transform: rotate(3deg)
+      }
+    }
+
+    @keyframes kvsTyping {
+
+      0%,
+      100% {
+        stroke-dashoffset: 210
+      }
+
+      50% {
+        stroke-dashoffset: 0
+      }
+    }
+
+    .kvs-float {
+      animation: kvsFloat 4.2s ease-in-out infinite
+    }
+
+    .kvs-glow {
+      animation: kvsGlow 3.6s ease-in-out infinite
+    }
+
+    .hero-illo-core-svg {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: kvsGlow 3.6s ease-in-out infinite, kvsBreathe 3.6s ease-in-out infinite
+    }
+
+    .kvs-wiggle {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: kvsWiggle 5s ease-in-out infinite
+    }
+
+    .code-typing {
+      stroke-dasharray: 210;
+      animation: kvsTyping 4.2s ease-in-out infinite
+    }
+
+    .hero-illo-lines .kvs-signal {
+      stroke-dasharray: 6 18;
+      animation: kvsSignal 2.4s linear infinite
+    }
+
+    @media(max-width:768px) {
+      .hero-illo-dot-a,
+      .hero-illo-dot-b {
+        display: none
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      .kvs-float,
+      .kvs-glow,
+      .hero-illo-lines .kvs-signal,
+      .hero-illo-neural circle,
+      .hero-illo-analytics rect,
+      .code-cursor,
+      .hero-illo-core-svg,
+      .kvs-wiggle,
+      .code-typing {
+        animation: none !important
+      }
+
+      .hero-illo-dotmove-group {
+        display: none
+      }
+    }
 
     @keyframes bdot {
 
@@ -674,6 +997,17 @@
       .h-title-wrap {
         transition: none
       }
+    }
+
+    .h-tagline {
+      font-family: var(--ff);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--r);
+      letter-spacing: -.2px;
+      margin: -.5rem 0 1rem;
+      opacity: 0;
+      animation: fadeUp .9s var(--spring) .52s forwards
     }
 
     .h-sub {
@@ -748,6 +1082,11 @@
       color: var(--r);
       transform: translateY(-3px) scale(1.02);
       box-shadow: 0 10px 30px rgba(0, 0, 0, .08)
+    }
+
+    .hero-cta:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .35);
+      outline-offset: 3px
     }
 
     .h-proof {
@@ -4807,24 +5146,28 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero" id="home">
+  <section class="hero" id="home" aria-labelledby="hero-heading">
     <canvas id="particleCanvas"></canvas>
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
     <div class="hero-container">
       <div class="hero-inner">
-        <h1 class="h-title">
+        <h1 class="h-title" id="hero-heading">
           <span class="h-title-wrap">
-            Learn AI.<br>
-            <span class="grad-text">Build Real Things.</span>
+            Learn AI From a<br>
+            <span class="grad-text">Real Practitioner.</span>
           </span>
         </h1>
-        <p class="h-sub">Practical AI training from Python fundamentals to Generative AI &amp; Autonomous Agents.</p>
+        <p class="h-tagline">Build Real Things.</p>
+        <p class="h-sub">Hands-on AI training focused on Python, Machine Learning, Generative AI, and real-world
+          projects.</p>
         <div class="h-acts">
-          <button onclick="openBookModal()" class="btn-primary mag"><i class="fa-solid fa-rocket"></i>&nbsp; Book a Free
+          <button onclick="openBookModal()" class="btn-primary mag hero-cta"
+            aria-label="Book a free demo with KVS Tricks"><i class="fa-solid fa-rocket"></i>&nbsp; Book a Free
             Demo</button>
-          <a href="https://www.youtube.com/@KVSTricks" target="_blank" class="btn-secondary mag"><i
-              class="fa-brands fa-youtube" style="color:#FF0000"></i>&nbsp; Watch Free Tutorials</a>
+          <a href="https://www.youtube.com/@KVSTricks" target="_blank" class="btn-secondary mag hero-cta"
+            aria-label="Watch free AI and programming tutorials"><i class="fa-brands fa-youtube"
+              style="color:#FF0000"></i>&nbsp; Watch Free Tutorials</a>
         </div>
         <div class="h-proof">
           <div class="h-proof-item"><i class="fa-solid fa-circle-play"></i> 300+ Free Tutorials</div>
@@ -4833,12 +5176,281 @@
         </div>
       </div>
       <div class="hero-media-col">
-        <div class="hero-video-card">
-          <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="images/hero_poster.jpg"
-            disablePictureInPicture disableRemotePlayback aria-hidden="true" tabindex="-1">
-            <source src="images/abc.png" type="img">
-          </video>
-        </div>
+        <div class="hero-illustration" aria-hidden="true">
+  <svg class="hero-illo-lines" viewBox="0 0 500 500" aria-hidden="true" focusable="false">
+    <path class="kvs-signal" d="M250,260 L250,90" stroke="#2563EB" stroke-width="2" fill="none" opacity=".38" style="animation-delay:0s"/>
+    <path class="kvs-signal" d="M250,260 L105,165" stroke="#2563EB" stroke-width="2" fill="none" opacity=".34" style="animation-delay:.5s"/>
+    <path class="kvs-signal" d="M250,260 L395,150" stroke="#2563EB" stroke-width="2" fill="none" opacity=".34" style="animation-delay:1s"/>
+    <path class="kvs-signal" d="M250,260 L115,365" stroke="#2563EB" stroke-width="2" fill="none" opacity=".3" style="animation-delay:1.5s"/>
+    <path class="kvs-signal" d="M250,260 L385,355" stroke="#2563EB" stroke-width="2" fill="none" opacity=".3" style="animation-delay:2s"/>
+    <path class="kvs-signal" d="M250,260 L250,410" stroke="#2563EB" stroke-width="2" fill="none" opacity=".26" style="animation-delay:2.5s"/>
+    <g class="hero-illo-dotmove-group">
+      <circle class="hero-illo-dotmove" r="5" fill="#2563EB">
+        <animateMotion dur="2.8s" begin="0s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="linear" path="M250,260 L250,90"/>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.88;1" dur="2.8s" begin="0s" repeatCount="indefinite"/>
+      </circle>
+      <circle class="hero-illo-dotmove" r="5" fill="#2563EB">
+        <animateMotion dur="2.8s" begin=".45s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="linear" path="M250,260 L105,165"/>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.88;1" dur="2.8s" begin=".45s" repeatCount="indefinite"/>
+      </circle>
+      <circle class="hero-illo-dotmove" r="5" fill="#2563EB">
+        <animateMotion dur="2.8s" begin=".9s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="linear" path="M250,260 L395,150"/>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.88;1" dur="2.8s" begin=".9s" repeatCount="indefinite"/>
+      </circle>
+      <circle class="hero-illo-dotmove" r="5" fill="#2563EB">
+        <animateMotion dur="2.8s" begin="1.35s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="linear" path="M250,260 L115,365"/>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.88;1" dur="2.8s" begin="1.35s" repeatCount="indefinite"/>
+      </circle>
+      <circle class="hero-illo-dotmove" r="5" fill="#2563EB">
+        <animateMotion dur="2.8s" begin="1.8s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="linear" path="M250,260 L385,355"/>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.88;1" dur="2.8s" begin="1.8s" repeatCount="indefinite"/>
+      </circle>
+      <circle class="hero-illo-dotmove" r="5" fill="#2563EB">
+        <animateMotion dur="2.8s" begin="2.25s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="linear" path="M250,260 L250,410"/>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.88;1" dur="2.8s" begin="2.25s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </svg>
+  <div class="hero-illo-item hero-illo-brain kvs-glow" style="animation-delay:.2s"><svg class="hero-illo-svg" viewBox="0 0 400 400" fill="none" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="blue-br" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563EB"/>
+    <stop offset="100%" stop-color="#1D4ED8"/>
+  </linearGradient>
+  <linearGradient id="screen-br" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0D2B68"/>
+    <stop offset="100%" stop-color="#050F2D"/>
+  </linearGradient>
+  <filter id="shadow-br" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#2563EB" flood-opacity=".16"/>
+  </filter>
+</defs>
+
+
+<g stroke="#155BDD" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M197 88c-30-34-84-16-84 27-35-1-48 43-24 64-28 31-4 76 35 72 7 39 61 48 82 15"/>
+  <path d="M203 88c30-34 84-16 84 27 35-1 48 43 24 64 28 31 4 76-35 72-7 39-61 48-82 15"/>
+  <path d="M200 83v196"/>
+  <path d="M163 120v39l-28 20M237 120v39l28 20M163 207v38l-28 17M237 207v38l28 17"/>
+</g>
+<g fill="#155BDD">
+  <circle cx="163" cy="120" r="9"/><circle cx="237" cy="120" r="9"/>
+  <circle cx="135" cy="179" r="9"/><circle cx="265" cy="179" r="9"/>
+  <circle cx="163" cy="245" r="9"/><circle cx="237" cy="245" r="9"/>
+</g>
+</svg></div>
+  <div class="hero-illo-item hero-illo-code kvs-float" style="animation-delay:.4s"><svg class="hero-illo-svg" viewBox="0 0 400 400" fill="none" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="blue-cw" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563EB"/>
+    <stop offset="100%" stop-color="#1D4ED8"/>
+  </linearGradient>
+  <linearGradient id="screen-cw" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0D2B68"/>
+    <stop offset="100%" stop-color="#050F2D"/>
+  </linearGradient>
+  <filter id="shadow-cw" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#2563EB" flood-opacity=".16"/>
+  </filter>
+</defs>
+
+
+<g filter="url(#shadow-cw)">
+  <rect x="45" y="65" width="310" height="270" rx="28" fill="#fff"/>
+  <path d="M45 93c0-15.46 12.54-28 28-28h254c15.46 0 28 12.54 28 28v35H45V93Z" fill="#123B8F"/>
+  <circle cx="77" cy="100" r="9" fill="#fff"/>
+  <circle cx="105" cy="100" r="9" fill="#FDE68A"/>
+  <circle cx="133" cy="100" r="9" fill="#fff"/>
+  <path d="m112 190 38-36m-38 36 38 36M225 154l-38 72" stroke="#2563EB" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="code-typing" d="M246 165h62M246 190h46M246 215h58M246 240h38" stroke="#8FB5F7" stroke-width="9" stroke-linecap="round"/>
+  <path d="M78 286h72M164 286h108" stroke="#B9CDF5" stroke-width="9" stroke-linecap="round"/>
+</g>
+  <rect class="code-cursor" x="292" y="232" width="9" height="12" rx="1.5" fill="#2563EB"/>
+</svg></div>
+  <div class="hero-illo-item hero-illo-analytics kvs-float" style="animation-delay:1.4s"><svg class="hero-illo-svg" viewBox="0 0 400 400" fill="none" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="blue-an" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563EB"/>
+    <stop offset="100%" stop-color="#1D4ED8"/>
+  </linearGradient>
+  <linearGradient id="screen-an" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0D2B68"/>
+    <stop offset="100%" stop-color="#050F2D"/>
+  </linearGradient>
+  <filter id="shadow-an" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#2563EB" flood-opacity=".16"/>
+  </filter>
+</defs>
+
+
+<g filter="url(#shadow-an)">
+  <rect x="45" y="65" width="310" height="270" rx="30" fill="#fff"/>
+</g>
+<rect x="82" y="232" width="46" height="55" rx="8" fill="#7DA7F4"/>
+<rect x="145" y="194" width="46" height="93" rx="8" fill="#3B82F6"/>
+<rect x="208" y="153" width="46" height="134" rx="8" fill="#2563EB"/>
+<rect x="271" y="106" width="46" height="181" rx="8" fill="#1457D9"/>
+<path d="M88 202 156 165l56 27 84-91" stroke="#2563EB" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="88" cy="202" r="10" fill="#2563EB"/>
+<circle cx="156" cy="165" r="10" fill="#2563EB"/>
+<circle cx="212" cy="192" r="10" fill="#2563EB"/>
+<circle cx="296" cy="101" r="10" fill="#2563EB"/>
+</svg></div>
+  <div class="hero-illo-item hero-illo-core kvs-float" style="animation-delay:0s"><svg class="hero-illo-svg hero-illo-core-svg" viewBox="0 0 400 400" fill="none" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="blue-ac" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563EB"/>
+    <stop offset="100%" stop-color="#1D4ED8"/>
+  </linearGradient>
+  <linearGradient id="screen-ac" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0D2B68"/>
+    <stop offset="100%" stop-color="#050F2D"/>
+  </linearGradient>
+  <filter id="shadow-ac" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#2563EB" flood-opacity=".16"/>
+  </filter>
+</defs>
+
+
+<g filter="url(#shadow-ac)">
+  <rect x="70" y="70" width="260" height="260" rx="42" fill="#fff"/>
+  <rect x="70" y="70" width="260" height="260" rx="42" stroke="#E7EEF9" stroke-width="3"/>
+</g>
+<text x="200" y="245" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+      font-size="132" font-weight="800" fill="url(#blue-ac)">AI</text>
+</svg></div>
+  <div class="hero-illo-item hero-illo-python kvs-float" style="animation-delay:.9s"><svg class="hero-illo-svg kvs-wiggle" viewBox="0 0 400 400" fill="none" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="blue-py" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563EB"/>
+    <stop offset="100%" stop-color="#1D4ED8"/>
+  </linearGradient>
+  <linearGradient id="screen-py" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0D2B68"/>
+    <stop offset="100%" stop-color="#050F2D"/>
+  </linearGradient>
+  <filter id="shadow-py" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#2563EB" flood-opacity=".16"/>
+  </filter>
+</defs>
+
+
+<g filter="url(#shadow-py)">
+  <rect x="65" y="65" width="270" height="270" rx="42" fill="#fff"/>
+</g>
+<path d="M200 102c-50 0-48 24-48 24v34h65v12h-91s-24-3-24 48 21 50 21 50h34v-36s-2-22 23-22h70s22 2 22-22v-43s3-45-49-45Z" fill="#1769E8"/>
+<circle cx="177" cy="123" r="8" fill="#fff"/>
+<path d="M200 298c50 0 48-24 48-24v-34h-65v-12h91s24 3 24-48-21-50-21-50h-34v36s2 22-23 22h-70s-22-2-22 22v43s-3 45 49 45Z" fill="#F7C514"/>
+<circle cx="223" cy="277" r="8" fill="#fff"/>
+</svg></div>
+  <div class="hero-illo-item hero-illo-neural" style="animation-delay:0s"><svg class="hero-illo-svg" viewBox="0 0 400 400" fill="none" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="blue-nn" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563EB"/>
+    <stop offset="100%" stop-color="#1D4ED8"/>
+  </linearGradient>
+  <linearGradient id="screen-nn" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0D2B68"/>
+    <stop offset="100%" stop-color="#050F2D"/>
+  </linearGradient>
+  <filter id="shadow-nn" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#2563EB" flood-opacity=".16"/>
+  </filter>
+</defs>
+
+
+<g filter="url(#shadow-nn)">
+  <rect x="55" y="55" width="290" height="290" rx="40" fill="#fff"/>
+</g>
+<g stroke="#2563EB" stroke-width="7" stroke-linecap="round">
+  <path d="M105 145 185 105M105 145l80 95M105 145l110 45M185 105l110 55M185 105l80 135M185 240l110-80M185 240l80 0M215 190l80-30"/>
+</g>
+<g fill="#155BDD">
+  <circle cx="105" cy="145" r="17"/><circle cx="185" cy="105" r="17"/>
+  <circle cx="185" cy="240" r="17"/><circle cx="215" cy="190" r="17"/>
+  <circle cx="295" cy="160" r="17"/><circle cx="265" cy="240" r="17"/>
+</g>
+</svg></div>
+  <div class="hero-illo-item hero-illo-laptop kvs-float" style="animation-delay:.6s"><svg class="hero-illo-svg kvs-glow" viewBox="0 0 400 400" fill="none" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="blue-lt" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563EB"/>
+    <stop offset="100%" stop-color="#1D4ED8"/>
+  </linearGradient>
+  <linearGradient id="screen-lt" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0D2B68"/>
+    <stop offset="100%" stop-color="#050F2D"/>
+  </linearGradient>
+  <filter id="shadow-lt" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#2563EB" flood-opacity=".16"/>
+  </filter>
+</defs>
+
+
+<g filter="url(#shadow-lt)">
+  <rect x="80" y="65" width="240" height="160" rx="15" fill="#fff" stroke="#DDE8FA" stroke-width="6"/>
+  <rect x="96" y="81" width="208" height="128" rx="7" fill="url(#screen-lt)"/>
+</g>
+<path d="M45 238h310l-28 42H73l-28-42Z" fill="#EAF2FF" stroke="#8EB2EE" stroke-width="5"/>
+<path d="M157 251h86l-10 15h-66l-10-15Z" fill="#C7D9F7"/>
+<g stroke-linecap="round">
+  <path d="M120 118h95M120 143h35M170 143h74M120 168h52M185 168h62M120 193h82" stroke="#2D75F0" stroke-width="7"/>
+  <path d="M120 143h18M120 168h35M120 193h18" stroke="#fff" stroke-width="5"/>
+</g>
+</svg></div>
+  <div class="hero-illo-item hero-illo-dot-a kvs-float" style="animation-delay:1.8s"><svg class="hero-illo-svg" viewBox="0 0 400 400" fill="none" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="blue-cn" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563EB"/>
+    <stop offset="100%" stop-color="#1D4ED8"/>
+  </linearGradient>
+  <linearGradient id="screen-cn" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0D2B68"/>
+    <stop offset="100%" stop-color="#050F2D"/>
+  </linearGradient>
+  <filter id="shadow-cn" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#2563EB" flood-opacity=".16"/>
+  </filter>
+</defs>
+
+
+<circle cx="200" cy="200" r="58" fill="#fff" stroke="#D9E7FF" stroke-width="5" filter="url(#shadow-cn)"/>
+<g stroke="#2563EB" stroke-width="7" stroke-linecap="round">
+  <path d="M200 200 120 125M200 200l82-76M200 200l-80 78M200 200l82 78"/>
+</g>
+<g fill="#2563EB">
+  <circle cx="200" cy="200" r="17"/><circle cx="120" cy="125" r="13"/>
+  <circle cx="282" cy="124" r="13"/><circle cx="120" cy="278" r="13"/>
+  <circle cx="282" cy="278" r="13"/>
+</g>
+</svg></div>
+  <div class="hero-illo-item hero-illo-dot-b kvs-float" style="animation-delay:2.4s"><svg class="hero-illo-svg" viewBox="0 0 400 400" fill="none" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="blue-cn2" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563EB"/>
+    <stop offset="100%" stop-color="#1D4ED8"/>
+  </linearGradient>
+  <linearGradient id="screen-cn2" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0D2B68"/>
+    <stop offset="100%" stop-color="#050F2D"/>
+  </linearGradient>
+  <filter id="shadow-cn2" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#2563EB" flood-opacity=".16"/>
+  </filter>
+</defs>
+
+
+<circle cx="200" cy="200" r="58" fill="#fff" stroke="#D9E7FF" stroke-width="5" filter="url(#shadow-cn2)"/>
+<g stroke="#2563EB" stroke-width="7" stroke-linecap="round">
+  <path d="M200 200 120 125M200 200l82-76M200 200l-80 78M200 200l82 78"/>
+</g>
+<g fill="#2563EB">
+  <circle cx="200" cy="200" r="17"/><circle cx="120" cy="125" r="13"/>
+  <circle cx="282" cy="124" r="13"/><circle cx="120" cy="278" r="13"/>
+  <circle cx="282" cy="278" r="13"/>
+</g>
+</svg></div>
+</div>
       </div>
     </div>
   </section>
@@ -5963,7 +6575,6 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
       const hero = document.querySelector('.hero');
       const heroInner = document.querySelector('.hero-inner');
       const heroLayers = [
-        { el: document.querySelector('.hero-video-card'), speed: .12 },
         { el: document.querySelector('.hero-bg'), speed: .09 },
         { el: document.querySelector('.hero-grid'), speed: .05 }
       ].filter(l => l.el);
