@@ -188,31 +188,63 @@ export default async function handler(req, res) {
 </body>
 </html>`;
 
-  try {
-    // Send both emails concurrently
-    const [adminResult, studentResult] = await Promise.all([
-      resend.emails.send({
-        from: FROM_EMAIL,
-        to:   [ADMIN_EMAIL],
-        subject: `📅 New Demo Request — ${course} (${from_name})`,
-        html: adminHtml,
-        reply_to: from_email,
-      }),
-      resend.emails.send({
-        from: FROM_EMAIL,
-        to:   [from_email],
-        subject: `You're booked! Your free KVSTricks demo session request`,
-        html: studentHtml,
-        reply_to: ADMIN_EMAIL,
-      }),
-    ]);
+  // NOTE: onboarding@resend.dev is Resend's sandbox sender — it can only
+  // deliver to the email address on your own Resend account, not to
+  // arbitrary visitors. Once you verify a real domain in Resend, set
+  // FROM_EMAIL (e.g. "KVSTricks <hello@kvstricks.com>") in your Vercel
+  // env vars so student acknowledgement emails actually deliver.
+  if (FROM_EMAIL.includes('resend.dev')) {
+    console.warn('FROM_EMAIL is still the Resend sandbox address — emails to visitors other than the account owner will fail. Verify a domain in Resend and set FROM_EMAIL.');
+  }
 
-    console.log('Emails sent:', { adminResult, studentResult });
-    return res.status(200).json({ success: true });
-  } catch (err) {
-    console.error('Resend error:', err);
+  // Use allSettled + inspect each result: the Resend SDK resolves with
+  // { data, error } instead of throwing on API-level failures (bad domain,
+  // unverified recipient, rate limit, etc). A bare try/catch around
+  // Promise.all silently misses these and reports success even when
+  // nothing was delivered.
+  const [adminOutcome, studentOutcome] = await Promise.allSettled([
+    resend.emails.send({
+      from: FROM_EMAIL,
+      to:   [ADMIN_EMAIL],
+      subject: `📅 New Demo Request — ${course} (${from_name})`,
+      html: adminHtml,
+      reply_to: from_email,
+    }),
+    resend.emails.send({
+      from: FROM_EMAIL,
+      to:   [from_email],
+      subject: `You're booked! Your free KVSTricks demo session request`,
+      html: studentHtml,
+      reply_to: ADMIN_EMAIL,
+    }),
+  ]);
+
+  const adminError =
+    adminOutcome.status === 'rejected' ? adminOutcome.reason : adminOutcome.value?.error;
+  const studentError =
+    studentOutcome.status === 'rejected' ? studentOutcome.reason : studentOutcome.value?.error;
+
+  // The admin notification is the critical one — if it fails, the lead
+  // is lost, so report failure to the front end and let it fall back to
+  // WhatsApp.
+  if (adminError) {
+    console.error('Admin notification email failed:', adminError);
     return res.status(500).json({ error: 'Failed to send email. Please try again.' });
   }
+
+  // The student acknowledgement is nice-to-have — don't fail the whole
+  // request over it (e.g. sandbox domain restriction), just log it.
+  if (studentError) {
+    console.warn('Student acknowledgement email failed:', studentError);
+  }
+
+  console.log('Emails sent:', {
+    adminId: adminOutcome.value?.data?.id,
+    studentId: studentOutcome.value?.data?.id,
+    studentEmailSent: !studentError,
+  });
+
+  return res.status(200).json({ success: true, studentEmailSent: !studentError });
 }
 
 // Simple HTML escaping to prevent XSS in email templates
