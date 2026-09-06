@@ -1489,22 +1489,20 @@
 
     /* ═══ ABOUT ═══ */
     .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.25fr;
-      gap: 4rem;
-      align-items: center
-    }
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
 
-    .about-img {
-      position: relative;
-      width: 100%;
-      max-width: 280px
-        /* was 360px */
-    }
+.about-img {
+  grid-column: 2;
+  grid-row: 1;
+}
 
     @media(min-width:768px) {
       .about-img {
-        max-width: 320px
+        max-width: 300px
           /* was 420px */
       }
     }
@@ -5181,7 +5179,6 @@
     <ul class="n-mid">
       <li><a href="#about">About</a></li>
       <li><a href="#courses">Courses</a></li>
-      <li><a href="#pricing">Pricing</a></li>
       <li><a href="#journey">Journey</a></li>
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -5544,7 +5541,6 @@
             </div>
           </div>
           <div class="av-badge av-b1"><i class="fa-solid fa-microchip"></i> AI Engineer</div>
-          <div class="av-badge av-b2"><i class="fa-solid fa-video" style="color:var(--r)"></i> 300+ Videos</div>
         </div>
         <div class="reveal-right">
           <span class="sc-label">About Me</span>
@@ -5560,7 +5556,7 @@
           <div class="a-chips stagger" style="margin-top:1.25rem">
             <span class="a-chip"><i class="fa-solid fa-building-columns" style="opacity:.5;margin-right:5px"></i>B.Tech
               Data Science</span>
-            <span class="a-chip"><i class="fa-solid fa-briefcase" style="opacity:.5;margin-right:5px"></i>5+ Yrs
+            <span class="a-chip"><i class="fa-solid fa-briefcase" style="opacity:.5;margin-right:5px"></i>5+ Yrs Teaching
               Experience</span>
             <span class="a-chip"><i class="fa-solid fa-robot" style="opacity:.5;margin-right:5px"></i>Anvi
               Robotics</span>
@@ -6071,11 +6067,11 @@
         </div>
         <div>
           <div class="cm-k">1-on-1 Rate</div>
-          <div class="cm-v">From ₹150/hr</div>
+          <div class="cm-v">Most Affordable</div>
         </div>
         <div>
           <div class="cm-k">Group Rate</div>
-          <div class="cm-v">From ₹80/hr</div>
+          <div class="cm-v">Best in Industry</div>
         </div>
         <div>
           <div class="cm-k">Duration</div>
@@ -6375,7 +6371,7 @@ Help visitors pick the right course. Ask about their background, goals, and expe
 
 Courses: Generative AI, Agentic AI, Python, Machine Learning, Deep Learning, LangChain, SQL & Databases, Data Analytics, Prompt Engineering, Computer Vision, Power BI, Data Science (Full).
 
-Pricing: 1-on-1 from ₹150/hr. Group batches from ₹80/hr. 300+ free YouTube videos at @KVSTricks.
+Pricing: 1-on-1 best in class. Group batches from best in class. 300+ free YouTube videos at @KVSTricks.
 
 Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course recommendation after learning their background. End with a gentle question OR a CTA. Never invent facts.`;
 
