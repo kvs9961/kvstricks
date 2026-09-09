@@ -1,6 +1,8 @@
 // api/send-demo.js
 // Vercel Serverless Function — handles demo booking email via Resend
-// Required env var: RESEND_API_KEY (set in Vercel project settings)
+// Required env var: RESEND_API_KEY (set in Vercel project settings → Environment Variables,
+// for BOTH "Production" and "Preview", then redeploy — new env vars never apply to a
+// deployment that already exists, only to the next one).
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'saiharshakvrsr@gmail.com';
 const FROM_EMAIL  = process.env.FROM_EMAIL  || 'KVSTricks <onboarding@resend.dev>';
@@ -8,34 +10,61 @@ const FROM_EMAIL  = process.env.FROM_EMAIL  || 'KVSTricks <onboarding@resend.dev
 export default async function handler(req, res) {
   // CORS headers (allow the portfolio origin)
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS, GET');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
+  // GET /api/send-demo?check=1 — quick health check you can hit straight in the
+  // browser to confirm the function deployed correctly and the env var is
+  // actually present, without submitting a real booking.
+  if (req.method === 'GET') {
+    return res.status(200).json({
+      ok: true,
+      hasResendKey: Boolean(process.env.RESEND_API_KEY),
+      adminEmail: ADMIN_EMAIL,
+      fromEmail: FROM_EMAIL,
+    });
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { from_name, from_email, from_phone, course, pref_time, message } = req.body || {};
+  // Everything below is wrapped in try/catch: a missing dependency, a bad
+  // import, or any other unexpected throw now always comes back as a JSON
+  // error the front end (and Vercel's function logs) can actually show,
+  // instead of crashing the function before any response is sent.
+  try {
+    const { from_name, from_email, from_phone, course, pref_time, message } = req.body || {};
 
-  // Basic validation
-  if (!from_name || !from_email || !from_phone || !course) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
+    // Basic validation
+    if (!from_name || !from_email || !from_phone || !course) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
 
-  if (!process.env.RESEND_API_KEY) {
-    console.error('RESEND_API_KEY is not set');
-    return res.status(500).json({ error: 'Email service not configured' });
-  }
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set in this environment');
+      return res.status(500).json({ error: 'Email service not configured (missing RESEND_API_KEY)' });
+    }
 
-  const { Resend } = await import('resend');
-  const resend = new Resend(process.env.RESEND_API_KEY);
+    let Resend;
+    try {
+      ({ Resend } = await import('resend'));
+    } catch (importErr) {
+      // This is the failure mode that produces "no email arrives at all,
+      // no error either" — the 'resend' package isn't installed because it's
+      // missing from package.json, so Vercel never bundled it.
+      console.error('Failed to import "resend" — is it listed in package.json dependencies?', importErr);
+      return res.status(500).json({ error: 'Email service dependency missing on the server (resend package not installed)' });
+    }
 
-  // ── Admin notification email ──────────────────────────────────────────────
-  const adminHtml = `
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    // ── Admin notification email ──────────────────────────────────────────────
+    const adminHtml = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,8 +133,8 @@ export default async function handler(req, res) {
 </body>
 </html>`;
 
-  // ── Student acknowledgement email ─────────────────────────────────────────
-  const studentHtml = `
+    // ── Student acknowledgement email ─────────────────────────────────────────
+    const studentHtml = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -143,7 +172,7 @@ export default async function handler(req, res) {
     <div class="body">
       <p>Hi <strong>${escapeHtml(from_name)}</strong>,</p>
       <p>Thank you for reaching out! I've received your request for a <strong>free demo session</strong> on <strong>${escapeHtml(course)}</strong>. I'll personally review it and get back to you within <strong>24 hours</strong> to confirm your slot.</p>
-      
+
       <div class="summary-box">
         <div class="summary-row">
           <span class="summary-key">Course</span>
@@ -188,63 +217,74 @@ export default async function handler(req, res) {
 </body>
 </html>`;
 
-  // NOTE: onboarding@resend.dev is Resend's sandbox sender — it can only
-  // deliver to the email address on your own Resend account, not to
-  // arbitrary visitors. Once you verify a real domain in Resend, set
-  // FROM_EMAIL (e.g. "KVSTricks <hello@kvstricks.com>") in your Vercel
-  // env vars so student acknowledgement emails actually deliver.
-  if (FROM_EMAIL.includes('resend.dev')) {
-    console.warn('FROM_EMAIL is still the Resend sandbox address — emails to visitors other than the account owner will fail. Verify a domain in Resend and set FROM_EMAIL.');
+    // NOTE: onboarding@resend.dev is Resend's sandbox sender — it can only
+    // deliver to the email address on your own Resend account, not to
+    // arbitrary visitors. Once you verify a real domain in Resend, set
+    // FROM_EMAIL (e.g. "KVSTricks <hello@kvstricks.com>") in your Vercel
+    // env vars so student acknowledgement emails actually deliver.
+    if (FROM_EMAIL.includes('resend.dev')) {
+      console.warn('FROM_EMAIL is still the Resend sandbox address — emails to visitors other than the account owner will fail. Verify a domain in Resend and set FROM_EMAIL.');
+    }
+
+    // Use allSettled + inspect each result: the Resend SDK resolves with
+    // { data, error } instead of throwing on API-level failures (bad domain,
+    // unverified recipient, rate limit, etc). A bare try/catch around
+    // Promise.all silently misses these and reports success even when
+    // nothing was delivered.
+    const [adminOutcome, studentOutcome] = await Promise.allSettled([
+      resend.emails.send({
+        from: FROM_EMAIL,
+        to:   [ADMIN_EMAIL],
+        subject: `📅 New Demo Request — ${course} (${from_name})`,
+        html: adminHtml,
+        reply_to: from_email,
+      }),
+      resend.emails.send({
+        from: FROM_EMAIL,
+        to:   [from_email],
+        subject: `You're booked! Your free KVSTricks demo session request`,
+        html: studentHtml,
+        reply_to: ADMIN_EMAIL,
+      }),
+    ]);
+
+    const adminError =
+      adminOutcome.status === 'rejected' ? adminOutcome.reason : adminOutcome.value?.error;
+    const studentError =
+      studentOutcome.status === 'rejected' ? studentOutcome.reason : studentOutcome.value?.error;
+
+    // Log full detail either way — this is what you should check in Vercel's
+    // function logs (Project → Deployments → the deployment → Functions tab)
+    // if emails still don't arrive.
+    console.log('send-demo result:', {
+      adminError: adminError ? (adminError.message || adminError) : null,
+      studentError: studentError ? (studentError.message || studentError) : null,
+      adminId: adminOutcome.value?.data?.id,
+      studentId: studentOutcome.value?.data?.id,
+    });
+
+    // The admin notification is the critical one — if it fails, the lead
+    // is lost, so report failure to the front end and let it fall back to
+    // WhatsApp.
+    if (adminError) {
+      console.error('Admin notification email failed:', adminError);
+      return res.status(500).json({ error: (adminError.message || 'Failed to send email') + '. Please try again.' });
+    }
+
+    // The student acknowledgement is nice-to-have — don't fail the whole
+    // request over it (e.g. sandbox domain restriction), just log it.
+    if (studentError) {
+      console.warn('Student acknowledgement email failed:', studentError);
+    }
+
+    return res.status(200).json({ success: true, studentEmailSent: !studentError });
+  } catch (err) {
+    // Last-resort catch: guarantees the client always gets a JSON response
+    // and the real failure reason lands in Vercel's function logs, instead
+    // of the request just hanging or failing with no visible cause.
+    console.error('Unhandled error in /api/send-demo:', err);
+    return res.status(500).json({ error: 'Unexpected server error. Please try WhatsApp directly.' });
   }
-
-  // Use allSettled + inspect each result: the Resend SDK resolves with
-  // { data, error } instead of throwing on API-level failures (bad domain,
-  // unverified recipient, rate limit, etc). A bare try/catch around
-  // Promise.all silently misses these and reports success even when
-  // nothing was delivered.
-  const [adminOutcome, studentOutcome] = await Promise.allSettled([
-    resend.emails.send({
-      from: FROM_EMAIL,
-      to:   [ADMIN_EMAIL],
-      subject: `📅 New Demo Request — ${course} (${from_name})`,
-      html: adminHtml,
-      reply_to: from_email,
-    }),
-    resend.emails.send({
-      from: FROM_EMAIL,
-      to:   [from_email],
-      subject: `You're booked! Your free KVSTricks demo session request`,
-      html: studentHtml,
-      reply_to: ADMIN_EMAIL,
-    }),
-  ]);
-
-  const adminError =
-    adminOutcome.status === 'rejected' ? adminOutcome.reason : adminOutcome.value?.error;
-  const studentError =
-    studentOutcome.status === 'rejected' ? studentOutcome.reason : studentOutcome.value?.error;
-
-  // The admin notification is the critical one — if it fails, the lead
-  // is lost, so report failure to the front end and let it fall back to
-  // WhatsApp.
-  if (adminError) {
-    console.error('Admin notification email failed:', adminError);
-    return res.status(500).json({ error: 'Failed to send email. Please try again.' });
-  }
-
-  // The student acknowledgement is nice-to-have — don't fail the whole
-  // request over it (e.g. sandbox domain restriction), just log it.
-  if (studentError) {
-    console.warn('Student acknowledgement email failed:', studentError);
-  }
-
-  console.log('Emails sent:', {
-    adminId: adminOutcome.value?.data?.id,
-    studentId: studentOutcome.value?.data?.id,
-    studentEmailSent: !studentError,
-  });
-
-  return res.status(200).json({ success: true, studentEmailSent: !studentError });
 }
 
 // Simple HTML escaping to prevent XSS in email templates
