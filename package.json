@@ -1,10 +1,9 @@
 {
-  "name": "kvstricks-portfolio",
+  "name": "kvstricks-site",
   "version": "1.0.0",
-  "description": "KVSTricks portfolio — AI/ML tutoring by K V S Harsha Vardhan Reddy",
   "private": true,
   "type": "module",
   "dependencies": {
-    "resend": "^3.5.0"
+    "resend": "^4.0.0"
   }
 }
