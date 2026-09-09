@@ -188,7 +188,14 @@
       opacity: .022;
       pointer-events: none;
       z-index: 1;
-      animation: noiseAnim .8s steps(2) infinite
+      animation: noiseAnim 1.6s steps(2) infinite;
+      will-change: transform
+    }
+
+    @media (max-width:768px) {
+      .noise {
+        animation: none
+      }
     }
 
     @keyframes noiseAnim {
@@ -273,16 +280,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: all .5s var(--smooth);
+      transition: transform .5s var(--smooth), opacity .5s var(--smooth), box-shadow .5s var(--smooth), background .5s var(--smooth), border-color .5s var(--smooth), color .5s var(--smooth);
       background: rgba(255, 255, 255, .4);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px)
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px)
     }
 
     nav.sc {
       background: rgba(255, 255, 255, .95);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       box-shadow: 0 1px 0 var(--bd)
     }
 
@@ -388,7 +395,7 @@
       font-size: .78rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all .3s var(--spring);
+      transition: transform .3s var(--spring), opacity .3s var(--spring), box-shadow .3s var(--spring), background .3s var(--spring), border-color .3s var(--spring), color .3s var(--spring);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -419,7 +426,7 @@
       height: 2px;
       background: var(--ink);
       border-radius: 2px;
-      transition: all .4s var(--spring)
+      transition: transform .4s var(--spring), opacity .4s var(--spring), box-shadow .4s var(--spring), background .4s var(--spring), border-color .4s var(--spring), color .4s var(--spring)
     }
 
     .hbg.open span:first-child {
@@ -931,12 +938,19 @@
       .code-cursor,
       .hero-illo-core-svg,
       .kvs-wiggle,
-      .code-typing {
+      .code-typing,
+      .noise,
+      .marquee-track,
+      .n-logo-dot {
         animation: none !important
       }
 
       .hero-illo-dotmove-group {
         display: none
+      }
+
+      html {
+        scroll-behavior: auto
       }
     }
 
@@ -1046,7 +1060,7 @@
       display: inline-flex;
       align-items: center;
       gap: .6rem;
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       cursor: pointer;
       box-shadow: 0 4px 24px rgba(37, 99, 235, .32)
     }
@@ -1071,7 +1085,7 @@
       display: inline-flex;
       align-items: center;
       gap: .6rem;
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       cursor: pointer;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px)
@@ -1694,7 +1708,7 @@
       font-family: var(--fh);
       font-size: .7rem;
       font-weight: 700;
-      transition: all .3s var(--spring);
+      transition: transform .3s var(--spring), opacity .3s var(--spring), box-shadow .3s var(--spring), background .3s var(--spring), border-color .3s var(--spring), color .3s var(--spring);
       cursor: default;
       letter-spacing: .3px
     }
@@ -1718,7 +1732,7 @@
       border: 1px solid var(--bd);
       border-radius: var(--r20);
       padding: 2.25rem;
-      transition: all .4s var(--spring);
+      transition: transform .4s var(--spring), opacity .4s var(--spring), box-shadow .4s var(--spring), background .4s var(--spring), border-color .4s var(--spring), color .4s var(--spring);
       position: relative;
       overflow: hidden
     }
@@ -1783,7 +1797,7 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 1.25rem;
-      transition: all .4s var(--spring);
+      transition: transform .4s var(--spring), opacity .4s var(--spring), box-shadow .4s var(--spring), background .4s var(--spring), border-color .4s var(--spring), color .4s var(--spring);
       padding: 8px
     }
 
@@ -1858,7 +1872,7 @@
       font-size: .8rem;
       font-weight: 700;
       color: var(--dk);
-      transition: all .3s var(--spring);
+      transition: transform .3s var(--spring), opacity .3s var(--spring), box-shadow .3s var(--spring), background .3s var(--spring), border-color .3s var(--spring), color .3s var(--spring);
       cursor: default;
       letter-spacing: .3px
     }
@@ -1887,7 +1901,7 @@
       border: 1px solid var(--bd);
       border-radius: var(--r20);
       overflow: hidden;
-      transition: all .45s var(--smooth);
+      transition: transform .45s var(--smooth), opacity .45s var(--smooth), box-shadow .45s var(--smooth), background .45s var(--smooth), border-color .45s var(--smooth), color .45s var(--smooth);
       cursor: pointer;
       position: relative
     }
@@ -1957,7 +1971,7 @@
       color: var(--r);
       font-size: 1rem;
       box-shadow: 0 4px 14px rgba(0, 0, 0, .14);
-      transition: all .35s var(--spring)
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring)
     }
 
     .ccard:hover .cc-img-icon {
@@ -2024,7 +2038,7 @@
       justify-content: center;
       color: var(--r);
       font-size: .65rem;
-      transition: all .35s var(--spring)
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring)
     }
 
     .ccard:hover .cc-arrow {
@@ -2061,7 +2075,7 @@
       padding: 2.25rem;
       position: relative;
       z-index: 1;
-      transition: all .45s var(--spring)
+      transition: transform .45s var(--spring), opacity .45s var(--spring), box-shadow .45s var(--spring), background .45s var(--spring), border-color .45s var(--spring), color .45s var(--spring)
     }
 
     .lp-card:hover {
@@ -2105,7 +2119,7 @@
       font-weight: 700;
       color: var(--dk);
       margin-bottom: 1.5rem;
-      transition: all .4s var(--spring)
+      transition: transform .4s var(--spring), opacity .4s var(--spring), box-shadow .4s var(--spring), background .4s var(--spring), border-color .4s var(--spring), color .4s var(--spring)
     }
 
     .lp-card:hover .lp-step {
@@ -2187,7 +2201,7 @@
       padding: 2.25rem;
       position: relative;
       overflow: hidden;
-      transition: all .4s var(--spring)
+      transition: transform .4s var(--spring), opacity .4s var(--spring), box-shadow .4s var(--spring), background .4s var(--spring), border-color .4s var(--spring), color .4s var(--spring)
     }
 
     .pc:hover {
@@ -2226,7 +2240,7 @@
       color: var(--r);
       font-size: 1.1rem;
       margin-bottom: 1.3rem;
-      transition: all .4s var(--spring)
+      transition: transform .4s var(--spring), opacity .4s var(--spring), box-shadow .4s var(--spring), background .4s var(--spring), border-color .4s var(--spring), color .4s var(--spring)
     }
 
     .pc:hover .pc-icon {
@@ -2316,7 +2330,7 @@
       font-size: .8rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       letter-spacing: .3px;
       border: 1.5px solid var(--bd2);
       background: #fff;
@@ -2485,7 +2499,7 @@
       border-radius: var(--r16);
       padding: 1.9rem;
       box-shadow: var(--sh);
-      transition: all .4s var(--spring)
+      transition: transform .4s var(--spring), opacity .4s var(--spring), box-shadow .4s var(--spring), background .4s var(--spring), border-color .4s var(--spring), color .4s var(--spring)
     }
 
     .tl-card:hover {
@@ -2641,7 +2655,7 @@
       border-radius: var(--rp);
       font-size: .72rem;
       font-weight: 600;
-      transition: all .25s var(--spring)
+      transition: transform .25s var(--spring), opacity .25s var(--spring), box-shadow .25s var(--spring), background .25s var(--spring), border-color .25s var(--spring), color .25s var(--spring)
     }
 
     .yt-chip:hover {
@@ -2667,7 +2681,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      transition: all .35s var(--spring)
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring)
     }
 
     .yt-stat:hover {
@@ -2687,7 +2701,7 @@
       color: #FF6666;
       font-size: .95rem;
       flex-shrink: 0;
-      transition: all .35s var(--spring)
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring)
     }
 
     .yt-stat:hover .yt-stat-icon {
@@ -2724,7 +2738,7 @@
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       cursor: pointer;
       margin-top: 1.75rem;
       box-shadow: 0 6px 26px rgba(255, 0, 0, .38);
@@ -2823,7 +2837,7 @@
       height: 80px;
       background: var(--rl);
       border-radius: 0 var(--r20) 0 80px;
-      transition: all .4s var(--spring)
+      transition: transform .4s var(--spring), opacity .4s var(--spring), box-shadow .4s var(--spring), background .4s var(--spring), border-color .4s var(--spring), color .4s var(--spring)
     }
 
     .tc:hover {
@@ -2956,7 +2970,7 @@
       font-size: .84rem;
       color: var(--r);
       flex-shrink: 0;
-      transition: all .35s var(--spring)
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring)
     }
 
     .tc:hover .tc-av {
@@ -3014,7 +3028,7 @@
       justify-content: center;
       color: var(--mu);
       cursor: pointer;
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       font-size: .9rem
     }
 
@@ -3039,7 +3053,7 @@
       cursor: pointer;
       border: none;
       padding: 0;
-      transition: all .3s var(--spring)
+      transition: transform .3s var(--spring), opacity .3s var(--spring), box-shadow .3s var(--spring), background .3s var(--spring), border-color .3s var(--spring), color .3s var(--spring)
     }
 
     .test-dot.active {
@@ -3268,7 +3282,7 @@
       font-size: .9rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       box-shadow: 0 4px 20px rgba(37, 99, 235, .28);
       display: flex;
       align-items: center;
@@ -3352,7 +3366,7 @@
       gap: 1rem;
       text-decoration: none;
       color: var(--ink);
-      transition: all .35s var(--spring)
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring)
     }
 
     .cf-info-card:hover {
@@ -3537,7 +3551,7 @@
       color: rgba(255, 255, 255, .7);
       cursor: pointer;
       font-size: .8rem;
-      transition: all .3s var(--spring);
+      transition: transform .3s var(--spring), opacity .3s var(--spring), box-shadow .3s var(--spring), background .3s var(--spring), border-color .3s var(--spring), color .3s var(--spring);
       z-index: 2
     }
 
@@ -3585,7 +3599,7 @@
       background: none;
       border: none;
       border-bottom: 2px solid transparent;
-      transition: all .25s;
+      transition: transform .25s, opacity .25s, box-shadow .25s, background .25s, border-color .25s, color .25s;
       letter-spacing: .5px
     }
 
@@ -3616,7 +3630,7 @@
       border-radius: var(--r16);
       text-decoration: none;
       color: var(--ink);
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       margin-bottom: .9rem
     }
 
@@ -3778,7 +3792,7 @@
       color: rgba(255, 255, 255, .7);
       cursor: pointer;
       font-size: .85rem;
-      transition: all .3s var(--spring);
+      transition: transform .3s var(--spring), opacity .3s var(--spring), box-shadow .3s var(--spring), background .3s var(--spring), border-color .3s var(--spring), color .3s var(--spring);
       z-index: 2
     }
 
@@ -3926,7 +3940,7 @@
       align-items: center;
       justify-content: center;
       gap: .6rem;
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       box-shadow: 0 6px 24px rgba(37, 99, 235, .32);
       text-decoration: none;
       margin-top: 2rem
@@ -4027,7 +4041,7 @@
       transform-origin: bottom right;
       opacity: 0;
       pointer-events: none;
-      transition: all .4s var(--spring);
+      transition: transform .4s var(--spring), opacity .4s var(--spring), box-shadow .4s var(--spring), background .4s var(--spring), border-color .4s var(--spring), color .4s var(--spring);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -4225,7 +4239,7 @@
       font-size: .74rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all .25s var(--spring);
+      transition: transform .25s var(--spring), opacity .25s var(--spring), box-shadow .25s var(--spring), background .25s var(--spring), border-color .25s var(--spring), color .25s var(--spring);
       font-family: var(--fh)
     }
 
@@ -4271,7 +4285,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all .3s var(--spring);
+      transition: transform .3s var(--spring), opacity .3s var(--spring), box-shadow .3s var(--spring), background .3s var(--spring), border-color .3s var(--spring), color .3s var(--spring);
       flex-shrink: 0
     }
 
@@ -4300,7 +4314,7 @@
       justify-content: center;
       cursor: pointer;
       font-size: .82rem;
-      transition: all .25s var(--spring);
+      transition: transform .25s var(--spring), opacity .25s var(--spring), box-shadow .25s var(--spring), background .25s var(--spring), border-color .25s var(--spring), color .25s var(--spring);
       flex-shrink: 0;
       font-family: var(--fh);
       gap: .3rem;
@@ -4374,7 +4388,7 @@
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       cursor: pointer;
       box-shadow: 0 4px 24px rgba(0, 0, 0, .22);
       letter-spacing: .3px
@@ -4398,7 +4412,7 @@
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       cursor: pointer;
       letter-spacing: .3px
     }
@@ -4491,7 +4505,7 @@
       color: rgba(255, 255, 255, .45);
       text-decoration: none;
       font-size: .9rem;
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       cursor: pointer;
       border: none
     }
@@ -4571,7 +4585,7 @@
       font-size: .9rem;
       cursor: pointer;
       box-shadow: var(--sh);
-      transition: all .35s var(--spring);
+      transition: transform .35s var(--spring), opacity .35s var(--spring), box-shadow .35s var(--spring), background .35s var(--spring), border-color .35s var(--spring), color .35s var(--spring);
       opacity: 0;
       pointer-events: none
     }
@@ -4612,11 +4626,11 @@
     }
 
     /* ═══ RESPONSIVE ═══ */
-    @media(max-width:1000px) {
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 3.5rem
-      }
+      @media(max-width:1000px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 3.5rem
+  }         
 
       .why-grid {
         grid-template-columns: 1fr 1fr
@@ -6200,7 +6214,7 @@
     function renderCourses() {
       document.getElementById('coursesGrid').innerHTML = COURSES.map(c => `
     <div class="ccard" onclick="openCModal('${c.id}')">
-      <div class="cc-img"><img src="${c.img}" alt="${c.name}" loading="lazy"/><div class="cc-img-overlay"></div>${c.badge ? `<div class="cc-img-badge">${c.badge}</div>` : ''}<div class="cc-img-icon"><i class="${c.icon}"></i></div></div>
+      <div class="cc-img"><img src="${c.img}" alt="${c.name}" loading="lazy" decoding="async" width="400" height="248"/><div class="cc-img-overlay"></div>${c.badge ? `<div class="cc-img-badge">${c.badge}</div>` : ''}<div class="cc-img-icon"><i class="${c.icon}"></i></div></div>
       <div class="cc-body"><div class="cc-name">${c.name}</div><div class="cc-tags">${c.tags}</div><div class="cc-footer"><div class="cc-level"><span class="cc-level-dot"></span>${c.level}</div><div class="cc-arrow"><i class="fa-solid fa-arrow-right"></i></div></div></div>
     </div>`).join('');
     }
@@ -6234,6 +6248,18 @@
         if (!cards.length) return;
         revSingleW = (cards[0].offsetWidth + 24) * REVIEWS.length;
         startRevLoop(); attachRevDrag(track);
+        /* The carousel RAF loop should cost nothing while the reviews
+           section is off-screen, not just while un-hovered. */
+        const sec = document.getElementById('reviews');
+        if (sec) {
+          const io = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) { if (!revRAF) startRevLoop(); }
+              else if (revRAF) { cancelAnimationFrame(revRAF); revRAF = null; }
+            });
+          }, { threshold: 0 });
+          io.observe(sec);
+        }
       });
     }
     function startRevLoop() {
@@ -6358,7 +6384,7 @@
     /* ══════════════════════════════════════════
        AI CHATBOT
     ══════════════════════════════════════════ */
-    let chatOpen = false, chatHistory = [], chatTyping = false;
+    let chatOpen = false, chatHistory = [], chatTyping = true;
     const CHAT_SYSTEM = `You are KVS AI Advisor, a friendly course advisor for KVSTricks — an AI/Python/ML tutoring platform by K V S Harsha Vardhan Reddy, an Associate AI Engineer at Anvi Robotics in Hyderabad with 5+ years of teaching experience.
 
 Help visitors pick the right course. Ask about their background, goals, and experience level, then give a clear recommendation.
@@ -6456,8 +6482,14 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
       const isMob = window.innerWidth < 768 || window.matchMedia('(pointer:coarse)').matches;
       const N = isMob ? 25 : 60; const CD = isMob ? 0 : 120;
       let W, H; const mouse = { x: -9999, y: -9999, vx: 0, vy: 0 };
-      document.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); const nx = e.clientX - r.left, ny = e.clientY - r.top; mouse.vx = mouse.vx * .5 + (nx - mouse.x) * .5; mouse.vy = mouse.vy * .5 + (ny - mouse.y) * .5; mouse.x = nx; mouse.y = ny; });
-      function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+      /* Raw pointer position only — cheap, no layout read on every mousemove.
+         The canvas-relative conversion (which needs getBoundingClientRect)
+         happens at most once per animation frame inside loop(), not once
+         per mousemove event. */
+      let rawX = -9999, rawY = -9999;
+      document.addEventListener('mousemove', e => { rawX = e.clientX; rawY = e.clientY; }, { passive: true });
+      let canvasRect = canvas.getBoundingClientRect();
+      function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; canvasRect = canvas.getBoundingClientRect(); }
       resize(); window.addEventListener('resize', resize);
       class P { constructor() { this.reset(true); } reset(init = false) { const a = Math.random() * Math.PI * 2, s = Math.random() * .45 + .12; this.x = init ? Math.random() * W : (Math.random() < .5 ? 0 : W); this.y = init ? Math.random() * H : (Math.random() < .5 ? 0 : H); this.vx = Math.cos(a) * s; this.vy = Math.sin(a) * s; this.r = Math.random() * 1.6 + .5; this.a = Math.random() * .26 + .06; } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(37,99,235,${this.a})`; ctx.fill(); } update() { const dx = mouse.x - this.x, dy = mouse.y - this.y, d = Math.sqrt(dx * dx + dy * dy); if (d < 220 && d > 55) { const s = ((220 - d) / 220) * .022, tx = -dy / d, ty = dx / d; this.vx += dx / d * s + tx * s * .6 + mouse.vx * .012; this.vy += dy / d * s + ty * s * .6 + mouse.vy * .012; } else if (d <= 55 && d > 1) { this.vx -= dx / d * .5 * (55 - d) / 55; this.vy -= dy / d * .5 * (55 - d) / 55; } const sp = Math.sqrt(this.vx * this.vx + this.vy * this.vy); if (sp > 3.5) { this.vx = this.vx / sp * 3.5; this.vy = this.vy / sp * 3.5; } this.vx *= .96; this.vy *= .96; this.x += this.vx; this.y += this.vy; if (this.x < -10) this.x = W + 10; if (this.x > W + 10) this.x = -10; if (this.y < -10) this.y = H + 10; if (this.y > H + 10) this.y = -10; } }
       class PulseLine {
@@ -6480,7 +6512,9 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
       }
       const pts = []; for (let i = 0; i < N; i++)pts.push(new P());
       const pulses = []; for (let i = 0; i < (isMob ? 6 : 14); i++)pulses.push(new PulseLine());
+      let rafId = null;
       function loop() {
+        mouse.x = rawX - canvasRect.left; mouse.y = rawY - canvasRect.top;
         ctx.clearRect(0, 0, W, H); mouse.vx *= .82; mouse.vy *= .82;
         if (CD > 0) {
           for (let i = 0; i < pts.length; i++)for (let j = i + 1; j < pts.length; j++) {
@@ -6490,15 +6524,28 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
         }
         pulses.forEach(pl => { pl.update(); pl.draw(); });
         pts.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(loop);
+        rafId = requestAnimationFrame(loop);
       }
-      loop();
+      /* Pause entirely (no rAF, no per-frame canvas work) whenever the hero
+         scrolls out of view, and resume when it's back — the particle field
+         should cost nothing while the visitor is reading the rest of the page. */
+      const hero = canvas.closest('.hero') || document.getElementById('home');
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!rafId) { canvasRect = canvas.getBoundingClientRect(); loop(); }
+          } else if (rafId) {
+            cancelAnimationFrame(rafId); rafId = null;
+          }
+        });
+      }, { threshold: 0 });
+      if (hero) io.observe(hero); else loop();
     }
     function initCursor() {
       if (window.matchMedia('(pointer:coarse)').matches) return;
       const cur = document.getElementById('cur'), curR = document.getElementById('curR');
       if (!cur) return; let mx = 0, my = 0, rx = 0, ry = 0;
-      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; });
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; }, { passive: true });
       (function a() { rx += (mx - rx) * .12; ry += (my - ry) * .12; curR.style.left = rx + 'px'; curR.style.top = ry + 'px'; requestAnimationFrame(a); })();
       document.querySelectorAll('a,button,.ccard,.why-card,.tc,.lp-card,.cf-info-card,.qc-method').forEach(el => {
         el.addEventListener('mouseenter', () => { cur.style.width = '16px'; cur.style.height = '16px'; curR.style.width = '60px'; curR.style.height = '60px'; curR.style.opacity = '.2'; });
@@ -6508,8 +6555,13 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
     function initMagnetic() {
       if (window.matchMedia('(pointer:coarse)').matches) return;
       document.querySelectorAll('.mag').forEach(el => {
-        el.addEventListener('mousemove', e => { const r = el.getBoundingClientRect(); el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .28}px,${(e.clientY - r.top - r.height / 2) * .28}px)`; });
-        el.addEventListener('mouseleave', () => el.style.transform = '');
+        /* Cache the rect once per hover instead of on every mousemove —
+           a magnetic element doesn't move mid-hover, so re-measuring on
+           each event only adds forced-layout cost for no visual benefit. */
+        let r = null;
+        el.addEventListener('mouseenter', () => { r = el.getBoundingClientRect(); });
+        el.addEventListener('mousemove', e => { if (!r) r = el.getBoundingClientRect(); el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .28}px,${(e.clientY - r.top - r.height / 2) * .28}px)`; });
+        el.addEventListener('mouseleave', () => { el.style.transform = ''; r = null; });
       });
     }
     function initScrollAnim() {
@@ -6522,31 +6574,46 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
       const lineIO = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('in'); }), { threshold: .03 });
       const tl = document.getElementById('tlLine'); if (tl) lineIO.observe(tl);
     }
+    /* ══════════════════════════════════════════
+       SINGLE CENTRAL SCROLL SCHEDULER
+       One scroll listener, one rAF tick. Nav state, the progress bar,
+       back-to-top, hero/about/timeline/decorative parallax and the
+       reveal/stagger reveal system all update from this one pass.
+       Every frame is split into a READ phase (all getBoundingClientRect
+       calls) followed by a WRITE phase (all style mutations) so reads
+       never interleave with writes — that interleaving is what forces
+       synchronous layout recalculation on a normal per-element loop.
+    ══════════════════════════════════════════ */
     function initScrollytelling() {
       const reduceQ = window.matchMedia('(prefers-reduced-motion:reduce)');
-      if (reduceQ.matches) return; /* CSS + existing IO-based .in system already gives a static, near-instant fallback */
-
       const ease = t => 1 - Math.pow(1 - t, 3);
       const clamp01 = n => n < 0 ? 0 : n > 1 ? 1 : n;
 
-      function progressFor(el, startVH, endVH) {
-        const r = el.getBoundingClientRect(), vh = window.innerHeight;
+      /* nav / progress bar / back-to-top — previously their own listener, now
+         part of the same tick so scrolling only ever schedules one rAF */
+      const pb = document.getElementById('pb'), nav = document.getElementById('nav'), btt = document.getElementById('btt');
+
+      function progressForRect(r, vh, startVH, endVH) {
         const startY = vh * startVH, endY = vh * endVH;
         return clamp01((startY - r.top) / (startY - endY));
       }
 
       /* ── reveal / reveal-left / reveal-right / reveal-scale ──
-         Elements fade+slide+scale IN as they enter from below, hold static
-         (control handed to CSS so :hover keeps working) while comfortably
-         in view, then fade+slide back OUT as they exit past the top —
-         giving a reversible, premium "un-scroll" feel in both directions. */
-      const revealEls = Array.from(document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale')).map(el => ({
+         Elements fade+slide+scale IN as they enter from below and then hold
+         static (control handed to CSS so :hover keeps working). They no
+         longer fade back out as they scroll past the top — that reversible
+         "un-scroll" behavior was making content visually disappear to blank
+         space while a section was still mid-scroll. Once an element has
+         fully revealed at least once, it just stays visible.
+         Skipped for reduced-motion users; the IO-based .in system in
+         initScrollAnim already gives a static, near-instant fallback. */
+      const revealEls = reduceQ.matches ? [] : Array.from(document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale')).map(el => ({
         el,
         type: el.classList.contains('reveal-left') ? 'left' : el.classList.contains('reveal-right') ? 'right' : el.classList.contains('reveal-scale') ? 'scale' : 'up',
-        live: false
+        live: false,
+        revealed: false
       }));
       function transformFor(type, e, dir) {
-        /* dir: 1 = entering (slide up from below / in from side), -1 = exiting (continue same direction, drift further) */
         if (type === 'left') return `translate3d(${(1 - e) * -60}px,0,0)`;
         if (type === 'right') return `translate3d(${(1 - e) * 60}px,0,0)`;
         if (type === 'scale') return `scale(${.87 + e * .13})`;
@@ -6559,13 +6626,13 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
         if (r.top <= exitFrom) return { p: clamp01((r.top - exitTo) / (exitFrom - exitTo)), zone: 'exit' };
         return { p: 1, zone: 'band' };
       }
-      function applyReveal(item, vh) {
-        const r = item.el.getBoundingClientRect();
+      function applyReveal(item, vh, r) {
         if (r.bottom < -vh * 1.5 || r.top > vh * 2.5) return; /* far off-screen, skip work */
         const { p, zone } = zoneProgress(r, vh);
-        if (zone === 'band') {
+        if (zone === 'band' || (zone === 'exit' && item.revealed)) {
           if (item.live) { item.el.style.opacity = ''; item.el.style.transform = ''; item.el.style.transition = ''; item.live = false; }
           item.el.classList.add('in');
+          if (zone === 'band') item.revealed = true;
           return;
         }
         if (!item.live) { item.el.style.transition = 'none'; item.live = true; }
@@ -6575,21 +6642,19 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
       }
 
       /* ── staggered card grids (each card tracks its OWN position so later rows
-         in multi-row grids don't get judged by the container's top/bottom) ── */
-      const staggerParents = Array.from(document.querySelectorAll('.stagger')).map(el => ({ el }));
-      function applyStagger(item, vh) {
-        const kids = item.el.children;
-        if (!kids.length) return;
-        const wrapR = item.el.getBoundingClientRect();
-        if (wrapR.bottom < -vh * 1.8 || wrapR.top > vh * 2.8) return; /* whole grid far off-screen, skip work */
+         in multi-row grids don't get judged by the container's top/bottom) ──
+         Same "stay visible once revealed" rule as above applies per-card. */
+      const staggerParents = reduceQ.matches ? [] : Array.from(document.querySelectorAll('.stagger')).map(el => ({ el }));
+      function applyStaggerWrite(item, kids, kidRects, vh) {
         for (let i = 0; i < kids.length; i++) {
-          const k = kids[i];
-          const kr = k.getBoundingClientRect();
+          const k = kids[i], kr = kidRects[i];
           if (kr.bottom < -vh * 1.2 || kr.top > vh * 1.7) continue; /* this card far off-screen, leave as-is */
           const { p, zone } = zoneProgress(kr, vh);
-          if (zone === 'band') {
+          const revealed = k.dataset.syRevealed === '1';
+          if (zone === 'band' || (zone === 'exit' && revealed)) {
             if (k.dataset.syLive === '1') { k.style.opacity = ''; k.style.transform = ''; k.style.transition = ''; k.dataset.syLive = '0'; }
             item.el.classList.add('in');
+            if (zone === 'band') k.dataset.syRevealed = '1';
             continue;
           }
           if (k.dataset.syLive !== '1') { k.style.transition = 'none'; k.dataset.syLive = '1'; }
@@ -6618,53 +6683,73 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
       const tlDots = Array.from(document.querySelectorAll('.tl-dot'));
 
       /* ── decorative background blobs ── */
-      const decoEls = Array.from(document.querySelectorAll('.sy-deco'));
+      const decoEls = reduceQ.matches ? [] : Array.from(document.querySelectorAll('.sy-deco'));
 
       function update() {
         const vh = window.innerHeight, sy = window.scrollY;
 
-        if (hero) {
-          const hh = hero.offsetHeight || vh;
-          if (sy < hh * 1.6) {
-            heroLayers.forEach(l => { l.el.style.transform = `translate3d(0,${sy * l.speed}px,0)`; });
-            if (heroInner) {
-              const hp = clamp01(sy / (hh * 0.95));
-              heroInner.style.opacity = 1 - hp * .75;
-              heroInner.style.transform = `translate3d(0,${-hp * 32}px,0) scale(${1 - hp * 0.03})`;
-            }
+        /* ── READ PHASE: every layout measurement for this frame happens
+           up front, before any style is written, so no read here can be
+           invalidated by a write earlier in the same frame. ── */
+        const docH = document.documentElement.scrollHeight - vh;
+        const heroHeight = hero ? (hero.offsetHeight || vh) : 0;
+        const aboutRect = aboutImg ? aboutImg.getBoundingClientRect() : null;
+        const tlRect = (tlLine && tlWrap) ? tlWrap.getBoundingClientRect() : null;
+        const tlDotRects = tlDots.map(d => d.getBoundingClientRect());
+        const decoRects = decoEls.map(d => d.parentElement.getBoundingClientRect());
+        const revealRects = revealEls.map(item => item.el.getBoundingClientRect());
+        const staggerReads = staggerParents.map(item => {
+          const kids = item.el.children;
+          if (!kids.length) return null;
+          const wrapR = item.el.getBoundingClientRect();
+          if (wrapR.bottom < -vh * 1.8 || wrapR.top > vh * 2.8) return null; /* whole grid far off-screen, skip work */
+          const kidRects = [];
+          for (let i = 0; i < kids.length; i++) kidRects.push(kids[i].getBoundingClientRect());
+          return { kids, kidRects };
+        });
+
+        /* ── WRITE PHASE ── */
+        if (pb) pb.style.width = (docH > 0 ? (sy / docH * 100) : 0) + '%';
+        if (nav) nav.classList.toggle('sc', sy > 50);
+        if (btt) btt.classList.toggle('vis', sy > 400);
+
+        if (reduceQ.matches) return; /* decorative scroll-linked motion skipped for reduced-motion users */
+
+        if (hero && sy < heroHeight * 1.6) {
+          heroLayers.forEach(l => { l.el.style.transform = `translate3d(0,${sy * l.speed}px,0)`; });
+          if (heroInner) {
+            const hp = clamp01(sy / (heroHeight * 0.95));
+            heroInner.style.opacity = 1 - hp * .75;
+            heroInner.style.transform = `translate3d(0,${-hp * 32}px,0) scale(${1 - hp * 0.03})`;
           }
         }
 
-        if (aboutImg) {
-          const r = aboutImg.getBoundingClientRect();
-          if (r.top < vh * 1.4 && r.bottom > -vh * 0.4) {
-            const centerOff = (r.top + r.height / 2) - vh / 2;
-            aboutImg.style.transform = `translate3d(0,${centerOff * -0.05}px,0)`;
-          }
+        if (aboutImg && aboutRect && aboutRect.top < vh * 1.4 && aboutRect.bottom > -vh * 0.4) {
+          const centerOff = (aboutRect.top + aboutRect.height / 2) - vh / 2;
+          aboutImg.style.transform = `translate3d(0,${centerOff * -0.05}px,0)`;
         }
 
-        if (tlLine && tlWrap) {
-          const r = tlWrap.getBoundingClientRect();
-          const total = r.height + vh * 0.55;
-          const traveled = vh * 0.82 - r.top;
+        if (tlLine && tlRect) {
+          const total = tlRect.height + vh * 0.55;
+          const traveled = vh * 0.82 - tlRect.top;
           const tp = clamp01(traveled / total);
           tlLine.style.transform = `translateX(-50%) scaleY(${tp})`;
         }
-        tlDots.forEach(d => {
-          const p = progressFor(d, .86, .6);
+        tlDots.forEach((d, i) => {
+          const p = progressForRect(tlDotRects[i], vh, .86, .6);
           d.style.scale = String(ease(p));
         });
 
-        decoEls.forEach(d => {
-          const r = d.parentElement.getBoundingClientRect();
+        decoEls.forEach((d, i) => {
+          const r = decoRects[i];
           if (r.top < vh * 1.5 && r.bottom > -vh * 0.5) {
             const centerOff = (r.top + r.height / 2) - vh / 2;
             d.style.transform = `translate3d(0,${centerOff * -0.07}px,0)`;
           }
         });
 
-        revealEls.forEach(item => applyReveal(item, vh));
-        staggerParents.forEach(item => applyStagger(item, vh));
+        revealEls.forEach((item, i) => applyReveal(item, vh, revealRects[i]));
+        staggerReads.forEach((data, idx) => { if (data) applyStaggerWrite(staggerParents[idx], data.kids, data.kidRects, vh); });
       }
 
       let ticking = false;
@@ -6688,11 +6773,6 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
       }), { threshold: .5 });
       document.querySelectorAll('.cnt').forEach(el => io.observe(el));
     }
-    function initScroll() {
-      const pb = document.getElementById('pb'), nav = document.getElementById('nav'), btt = document.getElementById('btt');
-      let ticking = false;
-      window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(() => { const s = window.scrollY, d = document.documentElement.scrollHeight - window.innerHeight; pb.style.width = (s / d * 100) + '%'; nav.classList.toggle('sc', s > 50); btt.classList.toggle('vis', s > 400); ticking = false; }); ticking = true; } }, { passive: true });
-    }
 
     /* ══════════════════════════════════════════
        MENU & KEYBOARD
@@ -6704,18 +6784,38 @@ Rules: Keep replies SHORT (2–4 sentences). Warm & direct. Give ONE course reco
     /* ══════════════════════════════════════════
        INIT
     ══════════════════════════════════════════ */
-    function initAll() {
+    /* ══════════════════════════════════════════
+       INIT — priority-tiered.
+       Critical (nav, courses, reveal baseline, scroll scheduler) runs the
+       moment the DOM is ready, underneath the preloader, so the Courses
+       section and core UI are already rendered by the time the preloader
+       fades — the preloader no longer gates content. Non-critical,
+       decorative-only systems (particles, custom cursor, magnetic hover)
+       are deferred to an idle callback so they never compete with first
+       paint or the initial layout/reveal pass.
+    ══════════════════════════════════════════ */
+    function initCritical() {
       renderTicker(); renderMarquee(); renderCourses(); renderReviews();
-      initHeroVideo(); initParticles(); initCursor(); initMagnetic(); initScrollAnim(); initCounters(); initScroll(); initScrollytelling();
+      initScrollAnim(); initScrollytelling(); initCounters();
+    }
+    function initNonCritical() {
+      initHeroVideo(); initParticles(); initCursor(); initMagnetic();
+    }
+    function initAll() {
+      initCritical();
+      const idle = window.requestIdleCallback || function (cb) { setTimeout(cb, 200); };
+      idle(initNonCritical, { timeout: 1500 });
     }
     (function () {
       const pl = document.getElementById('pl'), bar = document.getElementById('plBar'), pct = document.getElementById('plPct');
-      if (sessionStorage.getItem('kvs_v2')) { pl.style.display = 'none'; if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initAll); } else { initAll(); } return; }
+      const start = () => { if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initAll); } else { initAll(); } };
+      if (sessionStorage.getItem('kvs_v2')) { pl.style.display = 'none'; start(); return; }
       sessionStorage.setItem('kvs_v2', '1');
+      start(); /* critical content renders immediately, underneath the preloader overlay */
       let p = 0;
       const iv = setInterval(() => {
         p += Math.random() * 3.5 + 1;
-        if (p >= 100) { p = 100; clearInterval(iv); setTimeout(() => { pl.classList.add('gone'); setTimeout(() => { pl.style.display = 'none'; initAll(); }, 1100); }, 350); }
+        if (p >= 100) { p = 100; clearInterval(iv); setTimeout(() => { pl.classList.add('gone'); setTimeout(() => { pl.style.display = 'none'; }, 1100); }, 350); }
         bar.style.width = p + '%'; pct.textContent = Math.floor(p) + '%';
       }, 40);
     })();
